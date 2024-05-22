@@ -4,7 +4,6 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            title: 'title',
             images: [
                 {
                     image: 'img/01.webp',
@@ -26,8 +25,29 @@ createApp({
                     image: 'img/05.webp',
                     title: "Marvel's Avengers",
                     text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
-                }
+                },
             ],
-        }
+            //MI SALVO IN DATA UN VALORE DA ASSEGNARE AL POSTO DELLO 0 PER RAPPRESENTARE L IMG GRANDE ALL INTERNO DI ITEM
+            currentIndex: 0,
+        };
+    },
+    methods: {
+        //LA COMPONENTE THIS SERVE PER RICHIMARE I VALORI O FUNZIONI DENTRO DI ESSE
+        prevImage() {
+            if (this.currentIndex > 0) {
+                this.currentIndex--;
+
+            } else {
+                this.currentIndex = this.images.length - 1;
+            }
+        },
+        nextImage() {
+            if (this.currentIndex < this.images.length - 1) {
+
+                this.currentIndex++;
+            } else {
+                this.currentIndex = 0;
+            }
+        },
     }
 }).mount('#app');
