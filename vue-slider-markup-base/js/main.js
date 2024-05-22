@@ -1,7 +1,7 @@
 
 const { createApp } = Vue;
 
-createApp({
+myApp = createApp({
     data() {
         return {
             images: [
@@ -29,6 +29,8 @@ createApp({
             ],
             //MI SALVO IN DATA UN VALORE DA ASSEGNARE AL POSTO DELLO 0 PER RAPPRESENTARE L IMG GRANDE ALL INTERNO DI ITEM
             currentIndex: 0,
+            //PER DARE ASSEGNARE UN NOME A UNA VARIABILE O MEGLIO PER RICHIMARLA ALL INTERNO DI UNA FUNZIONE BISOGNA PRIMA DICHIARLAQUI IN DATA
+            currentInterval: null,
         };
     },
     methods: {
@@ -49,5 +51,20 @@ createApp({
                 this.currentIndex = 0;
             }
         },
+        changeImage(idx) {
+            this.currentIndex = idx;
+        },
+        startAutoplay() {
+            this.currentInterval = setInterval(this.nextImage, 3000);
+        },
+        stopAutoplay() {
+            clearInterval(this.currentInterval)
+        }
+    },
+    created() {
+        //AVENDO GIà UNA FUNZIONE CHE MANDA AVANTI LE IMMAGINI AL CLICK, ABBIAMO DETTO A SET INTERVAL DI ESEGUIRLO AUTOMATICAMNETE OGNI 3 SECONDI
+        // setInterval(this.nextImage, 3000);
+        this.startAutoplay()
     }
-}).mount('#app');
+})
+myApp.mount('#app');
